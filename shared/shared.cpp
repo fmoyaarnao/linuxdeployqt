@@ -256,7 +256,15 @@ LibraryInfo parseLddLibraryLine(const QString &line, const QString &appDirPath, 
                        "libvorbis.so.0" << "libwrap.so.0" << "libX11-xcb.so.1" << "libXau.so.6" << "libxcb-dri2.so.0" << "libxcb-dri3.so.0" << "libxcb-glx.so.0" <<
                        "libxcb-present.so.0" << "libxcb-randr.so.0" << "libxcb-render.so.0" << "libxcb-shape.so.0" << "libxcb-shm.so.0" << "libxcb-sync.so.1" <<
                        "libxcb-xfixes.so.0" << "libXcomposite.so.1" << "libXdamage.so.1" << "libXext.so.6" << "libXfixes.so.3" << "libXi.so.6" << "libxml2.so.2" <<
-                       "libXrandr.so.2" << "libXrender.so.1" << "libxshmfence.so.1" << "libXtst.so.6" << "libXv.so.1" << "libXxf86vm.so.1";
+                       "libXrandr.so.2" << "libXrender.so.1" << "libxshmfence.so.1" << "libXtst.so.6" << "libXv.so.1" << "libXxf86vm.so.1" << "libcrypt.so.1";
+
+        // Added to exclude all the librares for Gstreamer. We added later
+        excludelist << "libva-drm.so.1" << "libva-glx.so.1" << "libva.so.1" << "libva-x11.so.1" << "libgstallocators-1.0.so.0" << "libgstapp-0.10.so.0" <<
+                       "libgstapp-1.0.so.0" << "libgstaudio-0.10.so.0" << "libgstaudio-1.0.so.0" << "libgstbase-0.10.so.0" << "libgstbase-1.0.so.0" <<
+                       "libgstcodecparsers-1.0.so.0" << "libgstgl-1.0.so.0" << "libgstinterfaces-0.10.so.0" << "libgstpbutils-0.10.so.0" <<
+                       "libgstpbutils-1.0.so.0" << "libgstreamer-0.10.so.0" << "libgstreamer-1.0.so.0" << "libgsttag-1.0.so.0" << "libgstvaapi.so" <<
+                       "libgstvideo-0.10.so.0" << "libgstvideo-1.0.so.0";
+
         LogDebug() << "excludelist:" << excludelist;
         if (! trimmed.contains("libicu")) {
             if (containsHowOften(excludelist, QFileInfo(trimmed).completeBaseName())) {

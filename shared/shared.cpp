@@ -241,7 +241,22 @@ LibraryInfo parseLddLibraryLine(const QString &line, const QString &appDirPath, 
         */
 
         QStringList excludelist;
-        excludelist << "libasound.so.2" << "libcom_err.so.2" << "libcrypt.so.1" << "libc.so.6" << "libdl.so.2" << "libdrm.so.2" << "libexpat.so.1" << "libfontconfig.so.1" << "libgcc_s.so.1" << "libgdk_pixbuf-2.0.so.0" << "libgdk-x11-2.0.so.0" << "libgio-2.0.so.0" << "libglib-2.0.so.0" << "libGL.so.1" << "libgobject-2.0.so.0" << "libgpg-error.so.0" << "libgssapi_krb5.so.2" << "libgtk-x11-2.0.so.0" << "libhcrypto.so.4" << "libhx509.so.5" << "libICE.so.6" << "libidn.so.11" << "libk5crypto.so.3" << "libkeyutils.so.1" << "libkrb5.so.26" << "libkrb5.so.3" << "libkrb5support.so.0" << "libm.so.6" << "libnss3.so" << "libp11-kit.so.0" << "libpcre.so.3" << "libpthread.so.0" << "libresolv.so.2" << "libroken.so.18" << "librt.so.1" << "libselinux.so.1" << "libSM.so.6" << "libstdc++.so.6" << "libusb-1.0.so.0" << "libuuid.so.1" << "libwind.so.0" << "libX11.so.6" << "libxcb.so.1" << "libz.so.1";
+        excludelist << "libasound.so.2" << "libcom_err.so.2" << "libc.so.6" << "libdl.so.2" << "libdrm.so.2" << "libexpat.so.1" << "libfontconfig.so.1" <<
+                       "libgcc_s.so.1" << "libgdk_pixbuf-2.0.so.0" << "libgdk-x11-2.0.so.0" << "libgio-2.0.so.0" << "libglib-2.0.so.0" << "libGL.so.1" <<
+                       "libgobject-2.0.so.0" << "libgpg-error.so.0" << "libgssapi_krb5.so.2" << "libgtk-x11-2.0.so.0" << "libhcrypto.so.4" << "libhx509.so.5" <<
+                       "libICE.so.6" << "libidn.so.11" << "libk5crypto.so.3" << "libkeyutils.so.1" << "libkrb5.so.26" << "libkrb5.so.3" << "libkrb5support.so.0" <<
+                       "libm.so.6" << "libnss3.so" << "libp11-kit.so.0" << "libpcre.so.3" << "libpthread.so.0" << "libresolv.so.2" << "libroken.so.18" << "librt.so.1" <<
+                       "libselinux.so.1" << "libSM.so.6" << "libstdc++.so.6" << "libusb-1.0.so.0" << "libuuid.so.1" << "libwind.so.0" << "libX11.so.6" << "libxcb.so.1" <<
+                       "libz.so.1" << "libasyncns.so.0" << "libattr.so.1" << "libavahi-client.so.3" << "libavahi-common.so.3" << "libbz2.so.1" << "libcap.so.2" <<
+                       "libcrypto.so.10" << "libdbus-1.so.3" << "libdns_sd.so.1" << "libdw.so.1" << "libEGL.so.1" << "libelf.so.1" << "libffi.so.6" <<
+                       "libFLAC.so.8" << "libfreebl3.so" << "libfreetype.so.6" << "libgbm.so.1" << "libgcrypt.so.11" << "libglapi.so.0" << "libGLESv2.so.2" <<
+                       "libgmodule-2.0.so.0" << "libgsm.so.1" << "libgthread-2.0.so.0" << "libjasper.so.1" << "libjpeg.so.62" << "libjson-c.so.2" << "liblzma.so.5" <<
+                       "libnsl.so.1" << "libnspr4.so" << "libnssutil3.so" << "libogg.so.0" << "libplc4.so" << "libplds4.so" << "libpulsecommon-6.0.so" <<
+                       "libpulse.so.0" << "libsmime3.so" << "libsndfile.so.1" << "libssl3.so" << "libssl.so.10" << "libsystemd.so.0" << "libudev.so.1" << "libvorbisenc.so.2" <<
+                       "libvorbis.so.0" << "libwrap.so.0" << "libX11-xcb.so.1" << "libXau.so.6" << "libxcb-dri2.so.0" << "libxcb-dri3.so.0" << "libxcb-glx.so.0" <<
+                       "libxcb-present.so.0" << "libxcb-randr.so.0" << "libxcb-render.so.0" << "libxcb-shape.so.0" << "libxcb-shm.so.0" << "libxcb-sync.so.1" <<
+                       "libxcb-xfixes.so.0" << "libXcomposite.so.1" << "libXdamage.so.1" << "libXext.so.6" << "libXfixes.so.3" << "libXi.so.6" << "libxml2.so.2" <<
+                       "libXrandr.so.2" << "libXrender.so.1" << "libxshmfence.so.1" << "libXtst.so.6" << "libXv.so.1" << "libXxf86vm.so.1";
         LogDebug() << "excludelist:" << excludelist;
         if (! trimmed.contains("libicu")) {
             if (containsHowOften(excludelist, QFileInfo(trimmed).completeBaseName())) {
@@ -1077,7 +1092,7 @@ bool deployQmlImports(const QString &appDirPath, DeploymentInfo deploymentInfo, 
         LogError() << "Could not start qmlimpoortscanner. Process error is" << qmlImportScanner.errorString();
         return false;
     }
-    qmlImportScanner.waitForFinished();
+    qmlImportScanner.waitForFinished(-1);
 
     // log qmlimportscanner errors
     qmlImportScanner.setReadChannel(QProcess::StandardError);
